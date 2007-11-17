@@ -1,0 +1,39 @@
+---
+router:
+  routes:
+    - home: /(home)?
+    
+  '404': 404
+  
+  destinations:
+    location: scripts
+    extension: .php
+
+
+# example routes:
+#   routes:
+#    - destination:
+#        script: submissions
+#        param: { view: new }
+#      path: 
+#        url: /new
+#        param:
+#      
+#    - destination:
+#        script: submissions
+#      path:
+#        url: 
+#          - /top
+#          - /hot
+#          - /submissions 
+#          
+#    - bacon: /eggs/much/cheese
+#    
+#    - foods: [ /pork, /sausages, /cheese ]
+#    
+#    - submillion:
+#        url: |/sdddsasd/i
+#        param: { llloooo: kqqqq }
+#  
+#    - submissions: /   
+ 

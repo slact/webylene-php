@@ -1,0 +1,41 @@
+---
+plugins:
+  - tag
+  - user
+  - security
+  - db
+  - crisp
+  - errors
+
+database: 
+  host: mysql.slact.net
+  username: localuser
+  password: wavylocal22
+  db: shell
+
+logger:
+  logTo: nowhere
+#        db/file/nowhere
+
+  database: 					#database connection for the logger
+    host: mysql.slact.net		
+    username: localuser
+    password: wavylocal22
+    db: shell
+  
+env:
+  dev:
+    debug: 3
+    database: 
+      host: database.example.com
+      username: example
+      password: expassword
+      db: devdb
+
+#  prod:
+#    debug: 0
+#    database: 
+#      host: <production host>
+#      username: <username>
+#      password: <password>
+#      db: <database>

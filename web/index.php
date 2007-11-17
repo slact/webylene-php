@@ -1,0 +1,4 @@
+<?
+//DO NOT CHANGE THIS FILE. THIS LOADS THE BOOTSTRAP, AND THAT IS ALL IT SHOULD DO.
+include("../bootstrap.php"); 
+?>

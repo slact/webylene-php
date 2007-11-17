@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<?//include necessary js
+	if(is_array($t['js'])):?>
+		<?foreach ($t['js'] as $script):?>
+		<script language="javascript" type="text/javascript" src="/js/<?=$script?> "></script>
+		<?endforeach;?>  
+	<?endif?> 
+	<?//include necessary css
+	if(is_array($t['css'])):?>
+		<?foreach ($t['css'] as $stylesheet):?>
+			<link rel="stylesheet" type="text/css" href="/css/<?=$stylesheet?>" />
+		<?endforeach;?>
+	<?endif?>
+	<title>polywebylene synthesized</title>
+</head>
+<body>
+	<?template::myChild($t) //include child template if one exists?>
+</body>
+</html>
