@@ -8,29 +8,29 @@ plugins:
   - errors
 
 database: 
-  host: mysql.slact.net
-  username: localuser
-  password: wavylocal22
-  db: shell
+  host: 
+  username: 
+  password: 
+  db: 
 
 logger:
   logTo: nowhere
 #        db/file/nowhere
 
   database: 					#database connection for the logger
-    host: mysql.slact.net		
-    username: localuser
-    password: wavylocal22
-    db: shell
+    host: 
+    username: 
+    password: 
+    db: 
   
 env:
   dev:
     debug: 3
     database: 
-      host: database.example.com
-      username: example
-      password: expassword
-      db: devdb
+      host: 
+      username: 
+      password: 
+      db: 
 
 #  prod:
 #    debug: 0
