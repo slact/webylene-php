@@ -2,6 +2,8 @@
 
 /**
  * everything runs from here. 
+ * @package webylene
+ * @subpackage core
  */
 class core
 {
@@ -38,9 +40,7 @@ class core
 		$this->yaml=new YAML;
 		$this->loadFiles('config','yaml');
 		
-		//okay, we've loaded our configs. now let's load the RIGHT env-specific config.
-		if(($envSpecificConfig=cf('env',ENV))!='')
-			$GLOBALS['config']=array_merge($GLOBALS['config'], $envSpecificConfig);
+		
 		$this->discoverTemplates();
 		
 		//any classes with events I need to be aware of?
@@ -49,7 +49,7 @@ class core
 		$this->event('configLoaded');
 		
 		$this->loadPlugins();
-		
+
 		$this->event('sessionStart');
 		//now that all classes are loaded, we can start the session
 		session_start();
@@ -73,9 +73,21 @@ class core
 		foreach (glob($dir) as $file)
 		{
 			if($extension!='yaml')
-				@include_once("$file");
+				include_once("$file");
 			else
-				$GLOBALS['config']= array_merge($GLOBALS['config'], $this->yaml->load("$file"));
+			{
+				//okay, we've loaded our configs. now let's load the RIGHT env-specific config.
+				$config=$this->yaml->load("$file");
+				if(!empty($config['env'][ENV]))
+				{
+					$config=array_merge_recursive($config, $config['env'][ENV]);
+					unset($config['env']);
+					
+				}
+					
+				
+				$GLOBALS['config']= array_merge($GLOBALS['config'], $config);
+			}
 		}
 	}
 	
@@ -88,7 +100,7 @@ class core
 		$plugs = cf('plugins');
 		foreach ((array) $plugs as $plugin)
 		{
-			if (!@include_once(ROOT . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR . "$plugin.php")) //does it load?
+			if (!include_once(ROOT . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR . "$plugin.php")) //does it load?
 				echo ("Failed to load plugin $plugin. No such file found in plugins directory. You sure you installed it?<br />\n");
 			if(!class_exists($plugin))//uh oh! the file exists, but it doesn't define the plugin as a class. that's unfortunate.
 				echo ("Failed to load plugin $plugin. The file's there, but there's no $plugin class there. Probably the plugin author's fault.<br />\n");
@@ -108,7 +120,7 @@ class core
 			$className=$filePath['filename'];
 			if($filePath['filename']!='core' && $filePath['extension']='php')
 			{
-				if (!@include_once($filename)) //does it load?
+				if (!include_once($filename)) //does it load?
 					die("Couldn't load core class $className : file $filePath not found.");
 				if(!class_exists($className))//uh oh! the file exists, but it doesn't define the plugin as a class. that's unfortunate.
 					die("Core class file $className.php doesn't actually have said class declared.");				
@@ -128,7 +140,7 @@ class core
 			$className=$filePath['filename'];
 			if($filePath['filename']!='core' && $filePath['extension']='php')
 			{
-				if (!@include_once($filename)) //does it load?
+				if (!include_once($filename)) //does it load?
 				{
 					echo("Class w/event load failed: $className : file $filename not found.");
 					return false;
@@ -175,7 +187,10 @@ class core
 	}
 }
 
-
+/**
+ * @package: webylene
+ * @subpackage: core
+ */
 class events
 {
 	public $events=array();
@@ -214,6 +229,5 @@ class events
 			if(strpos($method, $this->eventListenerKey)===0) //of $eventListenerKey is present at beginning of method name
 				$this->addEventListener(substr($method, strlen($this->eventListenerKey)), array($className, $method));			
 	}
-	
 }
 ?>

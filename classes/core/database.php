@@ -1,4 +1,8 @@
 <?
+/**
+ * @package webylene
+ * @subpackage core
+ */
 class database {
 
 	var $db; //database link resource

@@ -1,8 +1,10 @@
 <?
+
 /**
  * HTML tag generator. useful to templates
+ * @package webylene
+ * @subpackage plugins
  */
-
 class tag
 {
 	function generic($tag, $attr=array())
@@ -75,9 +77,11 @@ class tag
 	private function attributes($attributes)
 	{
 		unset($attributes['innerHTML']);
+		$dontSlash=array('onclick','onsubmit','onkeypress');
+		
 		
 		foreach ($attributes as $attr => $val) 
-			$out.= " $attr='" . addcslashes($val,"'") . "' ";
+			$out.= " $attr='" . htmlentities($val, ENT_QUOTES) . "' ";
 		return $out;
 	}
 	

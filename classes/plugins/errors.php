@@ -1,6 +1,9 @@
 <?
+
 /**
  * the errorist
+ * @package webylene
+ * @subpackage plugins
  */ 
 class errors
 {
@@ -13,7 +16,7 @@ class errors
 	function add($message, $association='main')
 	{
 		if(!is_array($association))
-			$association=array($association, 'main');
+			$association=array($association);
 		$this->errors[]=array('message'=>$message, 'association'=>$association);
 	}
 	

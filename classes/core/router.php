@@ -1,6 +1,8 @@
 <?
-/** 
+/**
  * url router
+ * @package webylene
+ * @subpackage core
  */ 
 class router
 {
@@ -275,8 +277,8 @@ class router
 
 		$GLOBALS['core']->event('target');
 	
-		if(!(@include(ROOT.DIRECTORY_SEPARATOR.$path)))
-			die("router error: routed to $path, but file wasn't there. panic.");
+		if(!(include(ROOT.DIRECTORY_SEPARATOR.$path)))
+			$GLOBALS['logger']->log("error", "router error: routed to $path, but file wasn't there.");
 	}
 }
 ?>

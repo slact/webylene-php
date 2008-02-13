@@ -3,6 +3,8 @@
  * login/logout/registration
  * 
  * fires events: register, registrationSuccess, registrationFailure, login, loginSuccess, loginFailure, logout
+ * @package webylene
+ * @subpackage plugins
  */
 
 class security

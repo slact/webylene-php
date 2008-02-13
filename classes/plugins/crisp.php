@@ -1,6 +1,8 @@
 <?
 /**
  * static class to access crisps
+ * @package webylene
+ * @subpackage plugins
  */ 
 class crisp
 {
