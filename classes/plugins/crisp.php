@@ -1,6 +1,7 @@
 <?
 /**
  * static class to access crisps
+ * a crisp is a variable that persists for the next request, and then gets removed -- unless explicitly prolonged
  * @package webylene
  * @subpackage plugins
  */ 
@@ -17,7 +18,7 @@ class crisp
 	}
 	
 	/**
-	 * attach a function to be called when it's time to clean a crisp. function gets passed the crisp value.
+	 * attach a function to be called when it's time to remove a crisp. function gets passed the crisp value.
 	 * @param string $crisp crisp name
 	 * @param string $func function name. $func([crisp value]) will be called.
 	 * @return boolean 	 	  
@@ -88,7 +89,8 @@ class crisp
 							call_user_func($cleaner, $crisp['val']);
 					}
 				}
-				unset($_SESSION['crisps'][$name]);
+				if(!$crisp['keep']) //re-check, in case a cleaner decided to renew the crisp
+					unset($_SESSION['crisps'][$name]); 
 			}
 			else
 				$_SESSION['crisps'][$name]['keep']=false;
