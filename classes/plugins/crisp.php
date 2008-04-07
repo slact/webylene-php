@@ -70,6 +70,12 @@ class crisp
 		return true;
 	}
 	
+	static function renewAll()
+	{
+		foreach($_SESSION['crisps'] as $name => $val)
+			self::renew($name); 
+	}
+	
 	 /** 
 	  * run in bootstrap to clean the crisps.
 	  */	  	 
