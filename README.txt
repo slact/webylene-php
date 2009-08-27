@@ -51,7 +51,7 @@ Webylene
 
 The New BSD licence:
 
-Copyright (c) 2007, Leo Ponomarev
+Copyright (c) 2007-2009, Leo Ponomarev
 
 All rights reserved.
 
